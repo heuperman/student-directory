@@ -12,3 +12,7 @@ puts "Vess Ossman"
 puts "Peggy Seeger"
 puts "Fred Van Eps"
 puts "Henry Saint Clair 'Taj Mahal' Fredericks"
+
+print "Overall, we have "
+print 12
+puts " excellent students"

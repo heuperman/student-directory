@@ -1,4 +1,3 @@
-# let's put all the student names in an array
 students = [
   "Derroll Adams",
   "Louis 'Lou' Black",
@@ -13,11 +12,22 @@ students = [
   "Fred Van Eps",
   "Henry Saint Clair 'Taj Mahal' Fredericks"
 ]
-# and then print them
-puts "The students of Bela Fleck's Banjo Academy"
-puts "---------------"
-students.each do |student|
-  puts student
+
+def print_header
+  puts "The students of Bela Fleck's Banjo Academy"
+  puts "---------------"
 end
-# finally we print the total
-puts "Overall, we have #{students.count} excellent students"
+
+def print(names)
+  names.each do |name|
+    puts name
+  end
+end
+
+def print_footer(names)
+  puts "Overall, we have #{names.count} excellent students"
+end
+
+print_header
+print(students)
+print_footer(students)

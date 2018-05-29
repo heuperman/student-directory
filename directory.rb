@@ -1,3 +1,5 @@
+student_count = 12
+
 puts "The students of Bela Fleck's Banjo Academy"
 puts "---------------"
 puts "Derroll Adams"
@@ -13,6 +15,4 @@ puts "Peggy Seeger"
 puts "Fred Van Eps"
 puts "Henry Saint Clair 'Taj Mahal' Fredericks"
 
-print "Overall, we have "
-print 12
-puts " excellent students"
+puts "Overall, we have #{student_count} excellent students"

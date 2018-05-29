@@ -1,16 +1,16 @@
 students = [
-  "Derroll Adams",
-  "Louis 'Lou' Black",
-  "Dock Boggs",
-  "Jimmy Driftwood",
-  "Bee Ho Gray",
-  "Papa Charlie Jackson",
-  "Cosmo Jarvis",
-  "Narvin Kimball",
-  "Vess Ossman",
-  "Peggy Seeger",
-  "Fred Van Eps",
-  "Henry Saint Clair 'Taj Mahal' Fredericks"
+  {name: "Derroll Adams", cohort: :June},
+  {name: "Louis 'Lou' Black", cohort: :June},
+  {name: "Dock Boggs", cohort: :June},
+  {name: "Jimmy Driftwood", cohort: :June},
+  {name: "Bee Ho Gray", cohort: :June},
+  {name: "Papa Charlie Jackson", cohort: :June},
+  {name: "Cosmo Jarvis", cohort: :June},
+  {name: "Narvin Kimball", cohort: :June},
+  {name: "Vess Ossman", cohort: :June},
+  {name: "Peggy Seeger", cohort: :June},
+  {name: "Fred Van Eps", cohort: :June},
+  {name: "Henry Saint Clair 'Taj Mahal' Fredericks", cohort: :June}
 ]
 
 def print_header
@@ -18,14 +18,14 @@ def print_header
   puts "---------------"
 end
 
-def print(names)
-  names.each do |name|
-    puts name
+def print(students)
+  students.each do |student|
+    puts "#{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
 
-def print_footer(names)
-  puts "Overall, we have #{names.count} excellent students"
+def print_footer(students)
+  puts "Overall, we have #{students.count} excellent students"
 end
 
 print_header

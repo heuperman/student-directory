@@ -1,18 +1,23 @@
-student_count = 12
-
+# let's put all the student names in an array
+students = [
+  "Derroll Adams",
+  "Louis 'Lou' Black",
+  "Dock Boggs",
+  "Jimmy Driftwood",
+  "Bee Ho Gray",
+  "Papa Charlie Jackson",
+  "Cosmo Jarvis",
+  "Narvin Kimball",
+  "Vess Ossman",
+  "Peggy Seeger",
+  "Fred Van Eps",
+  "Henry Saint Clair 'Taj Mahal' Fredericks"
+]
+# and then print them
 puts "The students of Bela Fleck's Banjo Academy"
 puts "---------------"
-puts "Derroll Adams"
-puts "Louis 'Lou' Black"
-puts "Dock Boggs"
-puts "Jimmy Driftwood"
-puts "Bee Ho Gray"
-puts "Papa Charlie Jackson"
-puts "Cosmo Jarvis"
-puts "Narvin Kimball"
-puts "Vess Ossman"
-puts "Peggy Seeger"
-puts "Fred Van Eps"
-puts "Henry Saint Clair 'Taj Mahal' Fredericks"
-
-puts "Overall, we have #{student_count} excellent students"
+students.each do |student|
+  puts student
+end
+# finally we print the total
+puts "Overall, we have #{students.count} excellent students"

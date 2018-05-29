@@ -11,14 +11,21 @@ def input_students
   students
 end
 
+def starting_letter
+  puts "Choose a letter to show all stundents starting with this letter"
+  gets.chomp
+end
+
 def print_header
   puts "The students of Bela Fleck's Banjo Academy"
   puts "---------------"
 end
 
-def print(students)
-  students.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+def print(students, starting_letter)
+  students.each_with_index do |student, index|
+    if student[:name][0] == starting_letter
+      puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
+    end
   end
 end
 
@@ -28,5 +35,5 @@ end
 
 students = input_students
 print_header
-print(students)
+print(students, starting_letter)
 print_footer(students)

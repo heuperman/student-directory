@@ -9,7 +9,7 @@ def input_students
     student = Hash.new("unknown")
     months = [:Jan, :Feb, :March, :April, :May, :June, :July, :Aug, :Sept, :Oct, :Nov, :Dec]
     until months.include?(cohort)
-      puts "please input a month"
+      puts "please input a month".center(60)
       cohort = gets.chomp.to_sym
     end
     if !cohort.empty?
@@ -35,10 +35,14 @@ def print_header
 end
 
 def print(students)
+  puts "Which cohort would you like to see?".center(60)
+  cohort = gets.chomp.to_sym
   n = 0
-  while n < students.length
-    puts "#{n+1}. #{students[n][:name]} (#{students[n][:cohort]} cohort)".center(60)
-    n += 1
+  students.each do |student|
+    if student[:cohort] == cohort
+      puts "#{n+1}. #{student[:name]} (#{student[:cohort]} cohort)".center(60)
+      n += 1
+    end
   end
 end
 

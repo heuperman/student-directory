@@ -4,9 +4,11 @@ def input_students
   students = []
   name = gets.chomp
   while !name.empty? do
-    puts "And their favourite hobby".center(60)
+    puts "What is #{name}'s favourite hobby?".center(60)
     hobby = gets.chomp
-    students << {name: name, cohort: :June, hobby: hobby}
+    puts "What is #{name}'s country of origin?".center(60)
+    origin = gets.chomp
+    students << {name: name, cohort: :June, hobby: hobby, origin: origin}
     puts "We now have #{students.count} students".center(60)
     name = gets.chomp
   end
@@ -23,6 +25,7 @@ def print(students)
   while n < students.length
     puts "#{n+1}. #{students[n][:name]} (#{students[n][:cohort]} cohort)".center(60)
     puts "Favourite hobby: #{students[n][:hobby]}".center(60)
+    puts "Country of origin: #{students[n][:origin]}".center(60)
     n += 1
   end
 end

@@ -2,14 +2,19 @@ def input_students
   puts "Please enter the name of your students"
   puts "Just hit enter twice when finished"
   students = []
-  name = gets.chomp
+  name = gets.delete("\n")
   while !name.empty? do
     puts "What is #{name}'s favourite hobby?".center(60)
     hobby = gets.chomp
     puts "What is #{name}'s country of origin?".center(60)
     origin = gets.chomp
     students << {name: name, cohort: :June, hobby: hobby, origin: origin}
-    puts "We now have #{students.count} students".center(60)
+    # check if there is more than one student and pluralise if so.
+    if students.length > 1
+      puts "We now have #{students.count} students".center(60)
+    else
+      puts "We now have #{students.count} student".center(60)
+    end
     name = gets.chomp
   end
   students
@@ -31,7 +36,11 @@ def print(students)
 end
 
 def print_footer(students)
-  puts "Overall, we have #{students.count} excellent students".center(60)
+  if students.count > 1
+    puts "Overall, we have #{students.count} excellent students".center(60)
+  else
+    puts "Overall, we have #{students.count} excellent student".center(60)
+  end
 end
 
 students = input_students

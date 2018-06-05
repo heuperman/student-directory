@@ -1,3 +1,4 @@
+require 'CSV'
 @students = []
 @cohorts = []
 
@@ -60,11 +61,9 @@ end
 def save_students
   puts "Please choose a file name, no extension needed"
   filename = gets.chomp
-  File.open("#{filename}.csv", "w") do |file|
+  CSV.open("#{filename}.csv", "w") do |file|
     @students.each do |student|
-      student_data = [student[:name], student[:cohort]]
-      csv_line = student_data.join(",")
-      file.puts csv_line
+      file << [student[:name], student[:cohort]]
     end
   end
   puts "Student list saved as '#{filename}.csv'"
@@ -77,16 +76,14 @@ def select_file_to_load
 end
 
 def load_students(filename = "students.csv")
-  File.open(filename, "r") do |file|
-    file.readlines.each do |line|
-      add_student_to_list(line)
-    end
+  CSV.foreach(filename) do |line|
+    add_student_to_list(line)
   end
   puts "Loaded #{@students.count} names from #{filename}"
 end
 
 def add_student_to_list(line)
-  name, cohort = line.chomp.split(',')
+  name, cohort = line
   @students << {name: name, cohort: cohort.to_sym}
   @cohorts << cohort if !@cohorts.include? cohort
 end

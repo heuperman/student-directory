@@ -6,7 +6,6 @@ def try_load_students
   filename = "students.csv" if filename.nil?
   if File.exist?(filename)
     load_students(filename)
-    puts "Loaded #{@students.count} names from #{filename}"
   else
     puts "Sorry, #{filename} doesn't exist."
     exit
@@ -23,8 +22,8 @@ end
 def print_menu
   puts "1. Input student names"
   puts "2. Show list of students"
-  puts "3. Save the list to students.csv"
-  puts "4. Load list from students.csv"
+  puts "3. Save the list to a file"
+  puts "4. Load list from a file"
   puts "9. Exit"
 end
 
@@ -33,7 +32,7 @@ def process(selection)
     when "1" then @students = input_students
     when "2" then show_students
     when "3" then save_students
-    when "4" then load_students
+    when "4" then select_file_to_load
     when "9" then exit
     else puts "Invalid input, please try again"
   end
@@ -59,13 +58,22 @@ def show_students
 end
 
 def save_students
-  file = File.open("students.csv", "w")
+  puts "Please choose a file name, no extension needed"
+  filename = gets.chomp
+  file = File.open("#{filename}.csv", "w")
   @students.each do |student|
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
     file.puts csv_line
   end
   file.close
+  puts "Student list saved as '#{filename}.csv'"
+end
+
+def select_file_to_load
+  puts "Please enter filename to load list from"
+  filename = gets.chomp
+  load_students(filename)
 end
 
 def load_students(filename = "students.csv")
@@ -74,6 +82,7 @@ def load_students(filename = "students.csv")
     add_student_to_list(line)
   end
   file.close
+  puts "Loaded #{@students.count} names from #{filename}"
 end
 
 def add_student_to_list(line)

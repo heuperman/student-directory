@@ -2,7 +2,7 @@
 
 def try_load_students
   filename = ARGV.first
-  return if filename.nil?
+  filename = "students.csv" if filename.nil?
   if File.exist?(filename)
     load_students(filename)
     puts "Loaded #{@students.count} names from #{filename}"
@@ -18,15 +18,6 @@ def save_students
     student_data = [student[:name], student[:cohort]]
     csv_line = student_data.join(",")
     file.puts csv_line
-  end
-  file.close
-end
-
-def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-    name, cohort = line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym}
   end
   file.close
 end
@@ -69,32 +60,32 @@ def show_students
   print_footer
 end
 
-def input_students
-  puts "Please enter the name of your students"
-  puts "Just hit enter twice when finished"
-  name = STDIN.gets.delete("\n")
-  while !name.empty? do
-    puts "What cohort is #{name} in?".center(60)
-    cohort = STDIN.gets.chomp.to_sym
-    student = Hash.new("unknown")
-    months = [:Jan, :Feb, :March, :April, :May, :June, :July, :Aug, :Sept, :Oct, :Nov, :Dec]
-    until months.include?(cohort)
-      puts "please input a month".center(60)
-      cohort = STDIN.gets.chomp.to_sym
-    end
-    if !cohort.empty?
-      student[:cohort] = cohort
-    end
-    student[:name] = name
-    @students << student
+def add_student_to_list(line)
+  name, cohort = line.chomp.split(',')
+  @students << {name: name, cohort: cohort.to_sym}
+end
 
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
+  file.readlines.each do |line|
+    add_student_to_list(line)
+  end
+  file.close
+end
+
+def input_students
+  puts "Please enter the name of your students and their cohort, seprated by a comma"
+  puts "Just hit enter twice when finished"
+  line = STDIN.gets.chomp
+  until line.empty? do
+    add_student_to_list(line)
     # check if there is more than one student and pluralise if so.
     if @students.length > 1
       puts "We now have #{@students.count} students".center(60)
     else
       puts "We now have #{@students.count} student".center(60)
     end
-    name = STDIN.gets.chomp
+    line = gets.chomp
   end
   @students
 end

@@ -60,13 +60,13 @@ end
 def save_students
   puts "Please choose a file name, no extension needed"
   filename = gets.chomp
-  file = File.open("#{filename}.csv", "w")
-  @students.each do |student|
-    student_data = [student[:name], student[:cohort]]
-    csv_line = student_data.join(",")
-    file.puts csv_line
+  File.open("#{filename}.csv", "w") do |file|
+    @students.each do |student|
+      student_data = [student[:name], student[:cohort]]
+      csv_line = student_data.join(",")
+      file.puts csv_line
+    end
   end
-  file.close
   puts "Student list saved as '#{filename}.csv'"
 end
 
@@ -77,11 +77,11 @@ def select_file_to_load
 end
 
 def load_students(filename = "students.csv")
-  file = File.open(filename, "r")
-  file.readlines.each do |line|
-    add_student_to_list(line)
+  File.open(filename, "r") do |file|
+    file.readlines.each do |line|
+      add_student_to_list(line)
+    end
   end
-  file.close
   puts "Loaded #{@students.count} names from #{filename}"
 end
 
